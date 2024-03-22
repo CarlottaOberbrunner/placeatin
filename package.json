@@ -1,0 +1,38 @@
+{
+  "name": "placeatin",
+  "version": "1.0.0",
+  "main": "./",
+  "typings": "./",
+  "scripts": {
+    "tsc": "tsc --noEmit -p ./tsconfig.json",
+    "format": "find ./ -name '*.ts*' | xargs prettier --write --config ./.prettierrc --config-precedence file-override",
+    "lint": "tslint --project .",
+    "lint:fix": "tslint --project . --fix",
+    "prepublishOnly": "rimraf node_modules && npm i && npm run tsc && npm run lint",
+    "precommit": "lint-staged",
+    "prepush": "npm run lint && npm run tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CarlottaOberbrunner/placeatin.git"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.3",
+    "prettier": "^1.12.1",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "^2.8.1"
+  },
+  "lint-staged": {
+    "{src,__test__,examples}/**/*.ts": [
+      "npm run format",
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "author": "HunterMills",
+  "license": "MIT",
+  "homepage": "https://github.com/CarlottaOberbrunner/placeatin.git"
+}
